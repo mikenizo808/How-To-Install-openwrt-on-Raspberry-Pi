@@ -224,7 +224,7 @@ This is not recommended, but you can optionally run the following until failure 
 *Note: Credit for yolo mode https://unix.stackexchange.com/questions/400231/how-do-i-upgrade-all-of-my-installed-packages-in-openwrt*
 
 ## Handling `opkg update` Problems
-To update with `opks` requires good name resolution and good time sync.  Assuming you have those done right and a package is still failing to download a signature during `opkg update` then you can try to `wget` the package manually just to wake the network up so to speak.  You will not use the download, but if it succeeds, then you can try your `opkg update` again.
+To update with `opkg` requires good name resolution and good time sync.  Assuming you have those done right and a package is still failing to download a signature during `opkg update` then you can try to `wget` the package manually just to wake the network up so to speak.  You will not use the download, but if it succeeds, then you can try your `opkg update` again.
 
 ## Example Error
 All other packages (not shown) were fine, except for this one.
