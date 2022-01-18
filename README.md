@@ -221,6 +221,33 @@ This is not recommended, but you can optionally run the following until failure 
 	#After failure
 	sync; sync; reboot
 
+*Note: Credit for yolo mode https://unix.stackexchange.com/questions/400231/how-do-i-upgrade-all-of-my-installed-packages-in-openwrt*
+
+## Handling `opkg update` Problems
+To update with `opks` requires good name resolution and good time sync.  Assuming you have those done right and a package is still failing to download a signature during `opkg update` then you can try to `wget` the package manually just to wake the network up so to speak.  You will not use the download, but if it succeeds, then you can try your `opkg update` again.
+
+## Example Error
+All other packages (not shown) were fine, except for this one.
+
+	Collected errors:
+ 	* opkg_download: Failed to download https://downloads.openwrt.org/releases/21.02.1/packages/aarch64_cortex-a72/routing/Packages.gz, wget returned 4.
+ 	* opkg_download: Check your network settings and connectivity.
+
+## Example download "wake-up"
+
+	root@DesktopUSB:~# wget -O package.gz https://downloads.openwrt.org/releases/21.02.1/packages/aarch64_cortex-a72/routing/Packages.gz
+	Downloading 'https://downloads.openwrt.org/releases/21.02.1/packages/aarch64_cortex-a72/routing/Packages.gz'
+	Connecting to 168.119.138.211:443
+	Writing to 'package.gz'
+	package.gz           100% |*******************************| 12295   0:00:00 ETA
+	Download completed (12295 bytes)
+	root@DesktopUSB:~# 
+
+## Finally
+
+	opkg update
+
+*Note: Once you have `opkg update` working, scroll up in this guide and learn how to install the available packages, if you have not already.*
 
 ## Optional - Install `open-vpn`
 You can run without using vpn, but this would be a nice to have. Using VPN may require more work depending on what vendor (if any) you use for your VPN service.
